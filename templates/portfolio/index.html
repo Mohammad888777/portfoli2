@@ -198,24 +198,30 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>About Me</h2>
-                    <p>I'm a passionate architect and designer with over 15 years of experience creating spaces that inspire, function beautifully, and stand the test of time. My journey began with a deep fascination for how architecture can transform lives and communities.</p>
+
+                    <!-- <p>I'm a passionate architect and designer with over 15 years of experience creating spaces that inspire, function beautifully, and stand the test of time. My journey began with a deep fascination for how architecture can transform lives and communities.</p>
                     <p>My approach combines innovative design thinking with sustainable practices, ensuring every project contributes positively to its environment and community. I believe that great architecture is not just about aesthetics, but about creating meaningful experiences for the people who inhabit these spaces.</p>
-                    <p>From luxury residences to commercial complexes, I've had the privilege of working on diverse projects that challenge conventional design boundaries while maintaining functionality and sustainability at their core.</p>
+                    <p>From luxury residences to commercial complexes, I've had the privilege of working on diverse projects that challenge conventional design boundaries while maintaining functionality and sustainability at their core.</p> -->
+
+                    <p>
+                        {{a.description}}
+                    </p>
+
                     <div class="stats">
                         <div class="stat-item">
-                            <div class="stat-number">150+</div>
+                            <div class="stat-number">{{a.project_completed}}+</div>
                             <div class="stat-label">Projects Completed</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">25+</div>
+                            <div class="stat-number">{{a.awards}}+</div>
                             <div class="stat-label">Awards Won</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">15</div>
+                            <div class="stat-number">{{a.years_experience}}</div>
                             <div class="stat-label">Years Experience</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">98%</div>
+                            <div class="stat-number">{{a.satisfaction}}%</div>
                             <div class="stat-label">Client Satisfaction</div>
                         </div>
                     </div>
@@ -227,31 +233,38 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+  
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
+                {% for i in service %}
                 <div class="service-card">
-                    <div class="service-icon">🏗️</div>
-                    <h4>Architectural Design</h4>
-                    <p>Complete architectural solutions from concept to construction documentation.</p>
+                    <!-- <div class="service-icon">🏗️</div> -->
+                    <h4>{{i.title}}</h4>
+                    
+                    <p>{{i.description}}</p>
                 </div>
-                <div class="service-card">
+                {% endfor %}
+
+                <!-- <div class="service-card">
                     <div class="service-icon">🏠</div>
                     <h4>Interior Design</h4>
                     <p>Creating beautiful, functional interior spaces that reflect your vision and lifestyle.</p>
                 </div>
+
                 <div class="service-card">
                     <div class="service-icon">🌱</div>
                     <h4>Sustainable Design</h4>
                     <p>Environmentally conscious design solutions for a sustainable future.</p>
                 </div>
+
                 <div class="service-card">
                     <div class="service-icon">📐</div>
                     <h4>Project Management</h4>
                     <p>End-to-end project management ensuring timely and budget-conscious delivery.</p>
-                </div>
+                </div> -->
+
             </div>
         </div>
     </section>
@@ -265,15 +278,14 @@
                     <h3 style="font-size: 2rem; margin-bottom: 1rem;">Let's Create Something Amazing Together</h3>
                     <p style="font-size: 1.1rem; margin-bottom: 2rem;">Ready to bring your architectural vision to life? We'd love to hear about your project and discuss how we can help.</p>
                     <div style="margin-bottom: 1rem;">
-                        <strong>📍 Address:</strong><br>
-                        123 Design Street, Creative District<br>
-                        Architecture City, AC 12345
+                        <strong> Address:</strong><br>
+                        {{a.address}}
                     </div>
                     <div style="margin-bottom: 1rem;">
-                        <strong>📞 Phone:</strong> +1 (555) 123-4567
+                        <strong> Phone:</strong> +{{a.phone}}
                     </div>
                     <div>
-                        <strong>✉️ Email:</strong> hello@archstudio.com
+                        <strong> Email:</strong> {{a.myemail}}
                     </div>
                 </div>
                 <form class="contact-form" onsubmit="handleSubmit(event)">
@@ -757,24 +769,57 @@
         let puzzleAnimated = false;
         let puzzlePieces = [];
 
+        // function createPuzzle() {
+        //     const puzzleGrid = document.getElementById('puzzleGrid');
+        //     const isMobile = window.innerWidth <= 768;
+        //     const totalPieces = isMobile ? 12 : 24;
+        //     puzzleGrid.innerHTML = '';
+        //     puzzlePieces = [];
+        //     for (let i = 0; i < totalPieces; i++) {
+        //         const piece = document.createElement('div');
+        //         piece.className = 'puzzle-piece';
+        //         puzzleGrid.appendChild(piece);
+        //         puzzlePieces.push({
+        //             element: piece,
+        //             revealed: false,
+        //             order: Math.random()
+        //         });
+        //     }
+        //     puzzlePieces.sort((a, b) => a.order - b.order);
+        // }
+
+
         function createPuzzle() {
-            const puzzleGrid = document.getElementById('puzzleGrid');
-            const isMobile = window.innerWidth <= 768;
-            const totalPieces = isMobile ? 12 : 24;
-            puzzleGrid.innerHTML = '';
-            puzzlePieces = [];
-            for (let i = 0; i < totalPieces; i++) {
-                const piece = document.createElement('div');
-                piece.className = 'puzzle-piece';
-                puzzleGrid.appendChild(piece);
-                puzzlePieces.push({
-                    element: piece,
-                    revealed: false,
-                    order: Math.random()
-                });
-            }
-            puzzlePieces.sort((a, b) => a.order - b.order);
-        }
+    const puzzleGrid = document.getElementById('puzzleGrid');
+    const isMobile = window.innerWidth <= 768;
+    const totalPieces = isMobile ? 12 : 24;  // تعداد تکه‌های پازل بر اساس اندازه صفحه
+    puzzleGrid.innerHTML = '';  // ابتدا محتوای قبلی پازل را پاک می‌کنیم
+    puzzlePieces = [];
+    
+    // اینجا مسیر عکس شما را قرار می‌دهیم
+    const imageUrl = "{{a.image.url}}";  // مسیر عکس شما
+
+    // ایجاد تکه‌های پازل
+    for (let i = 0; i < totalPieces; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'puzzle-piece';
+        
+        // تنظیم تصویر پازل
+        piece.style.backgroundImage = `url('${imageUrl}')`;
+        piece.style.backgroundSize = 'cover';  // تصویر به طور کامل پوشش می‌دهد
+        piece.style.backgroundPosition = `-${(i % 4) * 25}% -${Math.floor(i / 4) * 25}%`;  // موقعیت تکه‌های پازل
+
+        puzzleGrid.appendChild(piece);
+        puzzlePieces.push({
+            element: piece,
+            revealed: false,
+            order: Math.random()
+        });
+    }
+
+    puzzlePieces.sort((a, b) => a.order - b.order);
+}
+
 
         function animatePuzzleOnScroll() {
             const aboutSection = document.getElementById('about');
@@ -812,15 +857,36 @@
             }
         }
 
+        // function showRealImage() {
+        //     const puzzleContainer = document.querySelector('.puzzle-container');
+        //     const realImage = document.createElement('div');
+        //     realImage.className = 'real-image';
+            
+        //     puzzleContainer.appendChild(realImage);
+        //     setTimeout(() => {
+        //         realImage.classList.add('show');
+        //     }, 100);
+        // }
+
+
         function showRealImage() {
-            const puzzleContainer = document.querySelector('.puzzle-container');
-            const realImage = document.createElement('div');
-            realImage.className = 'real-image';
-            puzzleContainer.appendChild(realImage);
-            setTimeout(() => {
-                realImage.classList.add('show');
-            }, 100);
-        }
+    const puzzleContainer = document.querySelector('.puzzle-container');
+    const realImage = document.createElement('div');
+    realImage.className = 'real-image';
+
+    // مسیر عکس خودتان را در اینجا قرار دهید
+    const image = document.createElement('img');
+    image.src = "{{a.image.url}}";  // مسیر عکس
+    image.alt = "Your Image";
+
+    realImage.appendChild(image);
+    puzzleContainer.appendChild(realImage);
+
+    setTimeout(() => {
+        realImage.classList.add('show');
+    }, 100);
+}
+
 
         document.addEventListener('DOMContentLoaded', function() {
             createPuzzle();
