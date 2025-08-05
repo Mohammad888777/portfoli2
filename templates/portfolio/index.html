@@ -137,14 +137,14 @@
                             <span class="hero-detail-label">Area:</span>
                             <span class="hero-detail-value" id="heroArea"></span>
                         </div>
-                        <div class="hero-detail-item">
+                        <!-- <div class="hero-detail-item">
                             <span class="hero-detail-label">Bedrooms:</span>
                             <span class="hero-detail-value" id="heroBedrooms"></span>
-                        </div>
-                        <div class="hero-detail-item">
+                        </div> -->
+                        <!-- <div class="hero-detail-item">
                             <span class="hero-detail-label">Bathrooms:</span>
                             <span class="hero-detail-value" id="heroBathrooms"></span>
-                        </div>
+                        </div> -->
                         <div class="hero-detail-item">
                             <span class="hero-detail-label">Year:</span>
                             <span class="hero-detail-value" id="heroYear"></span>
@@ -153,10 +153,10 @@
                             <span class="hero-detail-label">Location:</span>
                             <span class="hero-detail-value" id="heroLocation"></span>
                         </div>
-                        <div class="hero-detail-item">
+                        <!-- <div class="hero-detail-item">
                             <span class="hero-detail-label">Style:</span>
                             <span class="hero-detail-value" id="heroStyle"></span>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="hero-slide-counter">
                         <span id="heroCurrentSlide">1</span> / <span id="heroTotalSlides"></span>
@@ -373,11 +373,11 @@
                 ],
                 details: {
                     "Area": "{{ project.area|default:'N/A'|escapejs }}",
-                    "Bedrooms": "{{ project.bedrooms|default:'N/A'|escapejs }}",
-                    "Bathrooms": "{{ project.bathrooms|default:'N/A'|escapejs }}",
+                    // "Bedrooms": "{{ project.bedrooms|default:'N/A'|escapejs }}",
+                    // "Bathrooms": "{{ project.bathrooms|default:'N/A'|escapejs }}",
                     "Year": "{{ project.year|default:'N/A'|escapejs }}",
                     "Location": "{{ project.location|default:'N/A'|escapejs }}",
-                    "Style": "{{ project.style|default:'N/A'|escapejs }}"
+                    // "Style": "{{ project.style|default:'N/A'|escapejs }}"
                 }
             }{% if not forloop.last %},{% endif %}
             {% endfor %}
@@ -392,11 +392,11 @@
                     title: "{{ hero_project.title|default:'Untitled'|escapejs }}",
                     description: "{{ hero_project.description|default:'No description available'|escapejs }}",
                     area: "{{ hero_project.area|default:'N/A'|escapejs }}",
-                    bedrooms: "{{ hero_project.bedrooms|default:'N/A'|escapejs }}",
-                    bathrooms: "{{ hero_project.bathrooms|default:'N/A'|escapejs }}",
+                    // bedrooms: "{{ hero_project.bedrooms|default:'N/A'|escapejs }}",
+                    // bathrooms: "{{ hero_project.bathrooms|default:'N/A'|escapejs }}",
                     year: "{{ hero_project.year|default:'N/A'|escapejs }}",
                     location: "{{ hero_project.location|default:'N/A'|escapejs }}",
-                    style: "{{ hero_project.style|default:'N/A'|escapejs }}",
+                    // style: "{{ hero_project.style|default:'N/A'|escapejs }}",
                     image: "{{ child.image.url|default:'/media/placeholder.jpg'|escapejs }}"
                 }{% if not forloop.last %},{% endif %}
                 {% endfor %}
@@ -570,11 +570,11 @@
             document.getElementById('heroProjectTitle').textContent = data.title;
             document.getElementById('heroProjectDescription').textContent = data.description;
             document.getElementById('heroArea').textContent = data.area;
-            document.getElementById('heroBedrooms').textContent = data.bedrooms;
-            document.getElementById('heroBathrooms').textContent = data.bathrooms;
+            // document.getElementById('heroBedrooms').textContent = data.bedrooms;
+            // document.getElementById('heroBathrooms').textContent = data.bathrooms;
             document.getElementById('heroYear').textContent = data.year;
             document.getElementById('heroLocation').textContent = data.location;
-            document.getElementById('heroStyle').textContent = data.style;
+            // document.getElementById('heroStyle').textContent = data.style;
             document.getElementById('heroCurrentSlide').textContent = currentHeroSlide + 1;
             document.getElementById('heroTotalSlides').textContent = heroSlideData[projectId].length;
         }
