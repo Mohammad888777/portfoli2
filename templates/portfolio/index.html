@@ -6,12 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Architecture Portfolio - Creative Design Studio</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+
+    
+ <!-- NOTIFICATION -->
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <!-- JS Toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <style>
+                /* TOSTER */
+
+         .toast-top-left {
+        top: 20px;
+        left: 20px;
+    }
+
+    .toast-top-right {
+        top: 20px;
+        right: 20px;
+    }
+
+    .toast-bottom-left {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .toast-bottom-right {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .toast-center {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: fixed;
+    }
+
+    .toast-middle {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: fixed;
+    }
+
+    </style>
+
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">ARCH STUDIO</div>
+            <div class="logo">
+                <a href="{% url 'portfolio' %}">
+                    <img src="{% static 'logo.png' %}" alt="">
+                </a>
+            </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
@@ -42,6 +100,9 @@
             <!-- <h2 class="section-title">Featured Projects</h2> -->
             
             <!-- Main Slideshow -->
+             
+             <br>
+          
             <div class="main-slideshow">
                 {% for slider in sliders %}
                 <div class="slide {% if forloop.first %}active{% endif %}" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('{{ slider.image.url }}')">
@@ -198,11 +259,6 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>About Me</h2>
-
-                    <!-- <p>I'm a passionate architect and designer with over 15 years of experience creating spaces that inspire, function beautifully, and stand the test of time. My journey began with a deep fascination for how architecture can transform lives and communities.</p>
-                    <p>My approach combines innovative design thinking with sustainable practices, ensuring every project contributes positively to its environment and community. I believe that great architecture is not just about aesthetics, but about creating meaningful experiences for the people who inhabit these spaces.</p>
-                    <p>From luxury residences to commercial complexes, I've had the privilege of working on diverse projects that challenge conventional design boundaries while maintaining functionality and sustainability at their core.</p> -->
-
                     <p>
                         {{a.description}}
                     </p>
@@ -227,7 +283,7 @@
                     </div>
                 </div>
                 <div class="puzzle-container">
-                    <div class="puzzle-grid" id="puzzleGrid"></div>
+                    <img src="{{a.image.url}}" alt="About Me Image" class="about-image">
                 </div>
             </div>
         </div>
@@ -270,6 +326,7 @@
     </section>
 
     <!-- Contact Section -->
+
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title" style="color: white;">Get In Touch</h2>
@@ -288,24 +345,135 @@
                         <strong> Email:</strong> {{a.myemail}}
                     </div>
                 </div>
-                <form class="contact-form" onsubmit="handleSubmit(event)">
+                <form class="contact-form"  id="formContact">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                        <input type="text" placeholder="Your Name" name="name">
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
+                        <input type="email" placeholder="Your Email" name="email">
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Project Type">
+                        <input type="text" placeholder="Project Type" name="project">
                     </div>
                     <div class="form-group">
-                        <textarea rows="5" placeholder="Tell us about your project..." required></textarea>
+                        <textarea rows="5" placeholder="Tell us about your project..." id="textValue"></textarea>
                     </div>
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
+
+
+                <script  >
+
+                    function showNotification(type, message, title, positionClass) {
+                            toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": positionClass || "toast-top-right", // موقعیت نوتیفیکیشن
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "4000",
+                            "hideDuration": "2000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+
+                        // نمایش نوتیفیکیشن بر اساس نوع آن
+                        switch (type) {
+                            case 'success':
+                                toastr.success(message, title);
+                                break;
+                            case 'error':
+                                toastr.error(message, title);
+                                break;
+                            case 'warning':
+                                toastr.warning(message, title);
+                                break;
+                            case 'info':
+                                toastr.info(message, title);
+                                break;
+                            default:
+                                toastr.info(message, title);
+                        }
+                    }
+
+
+                    $(document).ready(function(e){
+                        $("#formContact").submit(function(e){
+                            e.preventDefault();
+
+                            let name=$("input[type=text][name=name]").val()
+                            let email=$("input[type=email]").val()
+                            let project=$("input[type=text][name=project]").val()
+                            let subject=$("#textValue").val()
+
+                            if (!name){
+                                showNotification('error', "please enter your name", '', 'toast-middle');
+                            }
+
+                            else if(!email){
+                                showNotification('error', "please enter your email address", '', 'toast-middle');
+
+                            }else if(!project){
+                                showNotification('error', "please enter your project", '', 'toast-middle');
+
+                            }else if(!subject){
+                                showNotification('error', "please tell me about your project", '', 'toast-middle');
+
+                            }
+
+                            
+
+                            else {
+
+                                let formData=new FormData()
+
+                                formData.append("name",name)
+                                formData.append("email",email)
+                                formData.append("project",project)
+                                formData.append("subject",subject)
+                                
+                                $.ajax({
+                                    url:"/aware/",
+                                    type:"POST",
+                                    data:formData,
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success:function(e){
+                                        if(e.send){
+                                            $("button[type=submit]").attr("disabled","disabled")
+                                            showNotification('success', "Thank you for your message! i will keep in touch", '', 'toast-middle');
+                                            function timeSet(){
+        
+                                                            window.location.reload()
+                                                        }
+                        
+                                                        const forSEtTime=setTimeout(timeSet,3500)
+                                        }
+                                        console.log(e)
+                                    }
+                                })
+                            }
+
+
+
+                        })
+                    })
+                    
+                    
+
+                </script>
             </div>
         </div>
     </section>
+
+
 
     <!-- Project Modal -->
     <div id="projectModal" class="project-modal">
@@ -327,6 +495,9 @@
             </div>
         </div>
     </div>
+
+
+<button class="scroll-top-btn" onclick="scrollToTop()" title="Go to Top">↑</button>
 
     <script>
         // Slideshow functionality
@@ -609,17 +780,31 @@
                 dotsContainer.appendChild(dot);
             });
 
+            // const detailsContainer = document.getElementById('modalDetails');
+            // detailsContainer.innerHTML = '';
+            // Object.entries(project.details).forEach(([label, value]) => {
+            //     const detailItem = document.createElement('div');
+            //     detailItem.className = 'detail-item';
+            //     detailItem.innerHTML = `
+            //         <div class="detail-label">${label}</div>
+            //         <div class="detail-value">${value}</div>
+            //     `;
+            //     detailsContainer.appendChild(detailItem);
+            // });
+
+
             const detailsContainer = document.getElementById('modalDetails');
-            detailsContainer.innerHTML = '';
-            Object.entries(project.details).forEach(([label, value]) => {
-                const detailItem = document.createElement('div');
-                detailItem.className = 'detail-item';
-                detailItem.innerHTML = `
-                    <div class="detail-label">${label}</div>
-                    <div class="detail-value">${value}</div>
-                `;
-                detailsContainer.appendChild(detailItem);
-            });
+detailsContainer.innerHTML = '';
+Object.entries(project.details).forEach(([label, value]) => {
+    const detailItem = document.createElement('div');
+    detailItem.className = 'detail-item';
+    detailItem.innerHTML = `
+        <div class="detail-label">${label} :</div>  <!-- : added here -->
+        <div class="detail-value">${value}</div>
+    `;
+    detailsContainer.appendChild(detailItem);
+});
+
 
             document.getElementById('projectModal').classList.add('active');
             currentModalSlide = 0;
@@ -719,10 +904,10 @@
             }
         });
 
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Thank you for your message! We\'ll get back to you soon. (This is a demo form)');
-        }
+        // function handleSubmit(event) {
+        //     event.preventDefault();
+        //     alert('Thank you for your message! We\'ll get back to you soon. (This is a demo form)');
+        // }
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -903,6 +1088,56 @@
             createPuzzle();
             setTimeout(animatePuzzleOnScroll, 100);
         });
+
+
+
+
+
+
+
+
     </script>
+<script>
+// وقتی اسکرول می‌کنی، دکمه رو نشون بده
+window.onscroll = function() {
+    const btn = document.querySelector(".scroll-top-btn");
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.classList.add("show");
+    } else {
+        btn.classList.remove("show");
+    }
+};
+
+// اسکرول نرم به بالا
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+<script>
+    
+</script>
+
 </body>
 </html>
