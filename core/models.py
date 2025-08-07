@@ -270,8 +270,7 @@ class OurService(models.Model):
 
     description=models.TextField(
          null=True,
-        blank=True,
-        
+         blank=True,
 
     )
 

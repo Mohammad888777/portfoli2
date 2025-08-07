@@ -6,12 +6,14 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
 from django.http import JsonResponse
-
 from django.core.mail import EmailMultiAlternatives
-
 from django.utils.decorators import method_decorator
-
 from django.views.decorators.csrf import csrf_exempt
+
+
+
+
+
 
 
 def portfolio_view(request):
@@ -35,8 +37,10 @@ def portfolio_view(request):
 
 
 
-@csrf_exempt
 
+
+
+@csrf_exempt
 def send_email(request):
 
     if request.method=="POST":
