@@ -23,6 +23,11 @@ class Slider(models.Model):
     )
 
 
+    class Meta:
+        verbose_name="silder"
+        verbose_name_plural="silder"
+
+
 
 
 
@@ -97,6 +102,10 @@ class Project(models.Model):
         blank=True
     )
 
+    class Meta:
+
+        verbose_name="project"
+        verbose_name_plural="project"
 
 
 
@@ -120,6 +129,12 @@ class ProjectChild(models.Model):
     )
 
 
+    class Meta:
+        verbose_name="ProjectChild"
+        verbose_name_plural="ProjectChild"
+
+
+
 class Gallery(models.Model):
 
     image=models.ImageField(
@@ -139,7 +154,9 @@ class Gallery(models.Model):
         blank=True
     )
 
-
+    class Meta:
+        verbose_name="Gallery"
+        verbose_name_plural="Gallery"
 
 
 class GalleryChild(models.Model):
@@ -161,6 +178,10 @@ class GalleryChild(models.Model):
     )
 
 
+
+    class Meta:
+        verbose_name="GalleryChild"
+        verbose_name_plural="GalleryChild"
 
 
 
@@ -232,7 +253,9 @@ class AboutMe(models.Model):
     )
 
 
-
+    class Meta:
+        verbose_name="AboutMe"
+        verbose_name_plural="AboutMe"
 
 
 class OurService(models.Model):
@@ -251,3 +274,8 @@ class OurService(models.Model):
         
 
     )
+
+
+    class Meta:
+        verbose_name="OurService"
+        verbose_name_plural="OurService"

@@ -105,12 +105,18 @@
           
             <div class="main-slideshow">
                 {% for slider in sliders %}
-                <div class="slide {% if forloop.first %}active{% endif %}" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('{{ slider.image.url }}')">
-                    <div class="slide-content">
-                        <h3>{{ slider.title|default:"Untitled" }}</h3>
-                        <p>{{ slider.description|default:"No description available" }}</p>
-                    </div>
-                </div>
+                    {% if slider.image %}
+                        <div class="slide {% if forloop.first %}active{% endif %}" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('{{ slider.image.url }}')">
+                            <div class="slide-content">
+                                {% if slider.title %}
+                                    <h3>{{ slider.title|default:"Untitled" }}</h3>
+                                {% endif %}
+                                {% if slider.description %}
+                                    <p>{{ slider.description|default:"No description available" }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
                 {% empty %}
                 <div class="slide active">
                     <div class="slide-content">
@@ -129,17 +135,23 @@
             <!-- Project Grid -->
             <div class="project-grid">
                 {% for project in projects %}
-                <div class="project-card" onclick="openProject('{{ project.id }}')">
-                    <div class="project-image" style="background-image: url('{{ project.image.url|default:'/media/placeholder.jpg' }}')">
-                        <div class="project-overlay">
-                            <span style="color: white; font-size: 1.2rem; font-weight: bold;">View Project</span>
+                    {% if project.image %}
+                        <div class="project-card" onclick="openProject('{{ project.id }}')">
+                            <div class="project-image" style="background-image: url('{{ project.image.url|default:'/media/placeholder.jpg' }}')">
+                                <div class="project-overlay">
+                                    <span style="color: white; font-size: 1.2rem; font-weight: bold;">View Project</span>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                {% if project.title %}
+                                    <h4>{{ project.title|default:"Untitled" }}</h4>
+                                {% endif %}
+                                {% if project.description %}
+                                    <p>{{ project.description|default:"No description available" }}</p>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                    <div class="project-info">
-                        <h4>{{ project.title|default:"Untitled" }}</h4>
-                        <p>{{ project.description|default:"No description available" }}</p>
-                    </div>
-                </div>
+                    {% endif %}
                 {% empty %}
                 <p>No projects available.</p>
                 {% endfor %}
@@ -172,13 +184,19 @@
         <div class="container">
             <div class="gallery-grid">
                 {% for gallery in galleries %}
-                <div class="gallery-item {% cycle 'left' 'right' %}" onclick="openGallery({{ forloop.counter0 }})">
-                    <img src="{{ gallery.image.url|default:'/media/placeholder.jpg' }}" alt="{{ gallery.title|default:'Gallery Image' }}">
-                    <div class="gallery-overlay">
-                        <h4>{{ gallery.title|default:"Untitled" }}</h4>
-                        <p>{{ gallery.subject|default:"No subject" }}</p>
+                {% if gallery.image%}
+                    <div class="gallery-item {% cycle 'left' 'right' %}" onclick="openGallery({{ forloop.counter0 }})">
+                        <img src="{{ gallery.image.url|default:'/media/placeholder.jpg' }}" alt="{{ gallery.title|default:'Gallery Image' }}">
+                        <div class="gallery-overlay">
+                            {% if gallery.title %}
+                                <h4>{{ gallery.title|default:"Untitled" }}</h4>
+                            {% endif %}
+                            {% if gallery.subject %}
+                                <p>{{ gallery.subject|default:"No subject" }}</p>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
                 {% empty %}
                 <p>No gallery items available.</p>
                 {% endfor %}
@@ -259,67 +277,79 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>About Me</h2>
-                    <p>
-                        {{a.description}}
-                    </p>
+                    {% if a.description %}
+                        <p>
+                            {{a.description}}
+                        </p>
+                    {% endif %}
 
                     <div class="stats">
                         <div class="stat-item">
+                        {% if a.project_completed %}
                             <div class="stat-number">{{a.project_completed}}+</div>
                             <div class="stat-label">Projects Completed</div>
+                        {% endif %}
                         </div>
+                        {% if a.awards %}
                         <div class="stat-item">
                             <div class="stat-number">{{a.awards}}+</div>
                             <div class="stat-label">Awards Won</div>
                         </div>
+                        {% endif %}
+                        {% if a.years_experience %}
                         <div class="stat-item">
                             <div class="stat-number">{{a.years_experience}}</div>
                             <div class="stat-label">Years Experience</div>
                         </div>
+                        {% endif %}
+                        {% if a.satisfaction %}
                         <div class="stat-item">
                             <div class="stat-number">{{a.satisfaction}}%</div>
                             <div class="stat-label">Client Satisfaction</div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="puzzle-container">
-                    <img src="{{a.image.url}}" alt="About Me Image" class="about-image">
+                {% if a.image %}
+
+                <style>
+                                    .about img {
+                    max-width: 100%;  /* عرض تصویر نباید از عرض والد بیشتر باشد */
+                    max-height: 800px;  /* حداکثر ارتفاع تصویر را تنظیم کنید */
+                    height: auto;
+                    object-fit: contain;
+                    border-radius: 20px;
+                }
+
+                </style>
+                <div class="md:w-1/2">
+                    <img src="{{ a.image.url }}" alt="About Me Image" class="w-full max-w-sm h-auto object-contain rounded-lg shadow-lg">
                 </div>
+                {% endif %}
             </div>
         </div>
     </section>
 
-  
+    <!-- About Section -->
+
+
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
                 {% for i in service %}
                 <div class="service-card">
+                    {% if i.title %}
                     <!-- <div class="service-icon">🏗️</div> -->
-                    <h4>{{i.title}}</h4>
-                    
-                    <p>{{i.description}}</p>
+                        <h4>{{i.title}}</h4>
+                    {% endif %}
+                    {% if i.description %}
+                        <p>{{i.description}}</p>
+                    {% endif %}
                 </div>
                 {% endfor %}
 
-                <!-- <div class="service-card">
-                    <div class="service-icon">🏠</div>
-                    <h4>Interior Design</h4>
-                    <p>Creating beautiful, functional interior spaces that reflect your vision and lifestyle.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🌱</div>
-                    <h4>Sustainable Design</h4>
-                    <p>Environmentally conscious design solutions for a sustainable future.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">📐</div>
-                    <h4>Project Management</h4>
-                    <p>End-to-end project management ensuring timely and budget-conscious delivery.</p>
-                </div> -->
+       
 
             </div>
         </div>
@@ -336,13 +366,19 @@
                     <p style="font-size: 1.1rem; margin-bottom: 2rem;">Ready to bring your architectural vision to life? We'd love to hear about your project and discuss how we can help.</p>
                     <div style="margin-bottom: 1rem;">
                         <strong> Address:</strong><br>
-                        {{a.address}}
+                        {% if a.address %}
+                            {{a.address}}
+                        {% endif %}
                     </div>
                     <div style="margin-bottom: 1rem;">
-                        <strong> Phone:</strong> +{{a.phone}}
+                        {% if a.phone %}
+                            <strong> Phone:</strong> +{{a.phone}}
+                        {% endif %}
                     </div>
                     <div>
-                        <strong> Email:</strong> {{a.myemail}}
+                        {% if a.myemail %}
+                            <strong> Email:</strong> {{a.myemail}}
+                        {% endif %}
                     </div>
                 </div>
                 <form class="contact-form"  id="formContact">
