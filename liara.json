@@ -1,12 +1,6 @@
 {
     "django": {
       "settingsFile": "config/settings.py"
-    },
-    "disks":[
-      {
-        "name":"nasim",
-        "mountTo":"media"
-      }
-      
-    ]
+    }
+    
 }

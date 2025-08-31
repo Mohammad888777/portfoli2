@@ -72,7 +72,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
+                <!-- <li><a href="#portfolio">Portfolio</a></li> -->
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -108,11 +108,11 @@
                     {% if slider.image %}
                         <div class="slide {% if forloop.first %}active{% endif %}" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('{{ slider.image.url }}')">
                             <div class="slide-content">
-                                {% if slider.title %}
+                                <!-- {% if slider.title %}
                                     <h3>{{ slider.title|default:"Untitled" }}</h3>
-                                {% endif %}
+                                {% endif %} -->
                                 {% if slider.description %}
-                                    <p>{{ slider.description|default:"No description available" }}</p>
+                                    <h2>{{ slider.description|default:"No description available" }}</h2>
                                 {% endif %}
                             </div>
                         </div>
@@ -142,14 +142,7 @@
                                     <span style="color: white; font-size: 1.2rem; font-weight: bold;">View Project</span>
                                 </div>
                             </div>
-                            <div class="project-info">
-                                {% if project.title %}
-                                    <h4>{{ project.title|default:"Untitled" }}</h4>
-                                {% endif %}
-                                {% if project.description %}
-                                    <p>{{ project.description|default:"No description available" }}</p>
-                                {% endif %}
-                            </div>
+                            
                         </div>
                     {% endif %}
                 {% empty %}
@@ -276,7 +269,7 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>About Me</h2>
+                    <h2>About</h2>
                     {% if a.description %}
                         <p>
                             {{a.description}}

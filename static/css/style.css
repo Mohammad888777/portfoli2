@@ -210,12 +210,12 @@
         .slide-content {
             text-align: center;
             color: white;
-            background: rgba(0,0,0,0.5);
+            /* background: rgba(0,0,0,0.5);
             padding: 2rem;
             border-radius: 15px;
             backdrop-filter: blur(10px);
             transform: translateY(50px);
-            opacity: 0;
+            opacity: 0; */
             transition: all 0.8s ease 0.3s;
         }
 
