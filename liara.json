@@ -1,6 +1,13 @@
 {
     "django": {
       "settingsFile": "config/settings.py"
-    }
+    },
+    "disks":[
+      {
+        "name":"portfoliodisk",
+        "mountTo":"media"
+      }
+      
+    ]
     
 }
