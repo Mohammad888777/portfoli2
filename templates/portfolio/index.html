@@ -63,7 +63,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <!-- <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
                 <a href="{% url 'portfolio' %}">
@@ -72,13 +72,27 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <!-- <li><a href="#portfolio">Portfolio</a></li> -->
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
+<nav class="navbar">
+    <div class="logo">
+        <a href="{% url 'portfolio' %}">
+            <img src="{% static 'logo.png' %}" alt="">
+        </a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+    
 
     <!-- Hero Section -->
     <!-- <section id="home" class="hero">
@@ -572,11 +586,11 @@
                     {% endfor %}
                 ],
                 details: {
-                    "Area": "{{ project.area|default:'N/A'|escapejs }}",
+                    "Type": "{{ project.type|default:'N/A'|escapejs }}",
                     // "Bedrooms": "{{ project.bedrooms|default:'N/A'|escapejs }}",
                     // "Bathrooms": "{{ project.bathrooms|default:'N/A'|escapejs }}",
-                    "Year": "{{ project.year|default:'N/A'|escapejs }}",
-                    "Location": "{{ project.location|default:'N/A'|escapejs }}",
+                    "Status": "{{ project.status|default:'N/A'|escapejs }}",
+                    "Scale": "{{ project.scale|default:'N/A'|escapejs }}",
                     // "Style": "{{ project.style|default:'N/A'|escapejs }}"
                 }
             }{% if not forloop.last %},{% endif %}
@@ -591,11 +605,11 @@
                 {
                     title: "{{ hero_project.title|default:'Untitled'|escapejs }}",
                     description: "{{ hero_project.description|default:'No description available'|escapejs }}",
-                    area: "{{ hero_project.area|default:'N/A'|escapejs }}",
+                    area: "{{ hero_project.type|default:'N/A'|escapejs }}",
                     // bedrooms: "{{ hero_project.bedrooms|default:'N/A'|escapejs }}",
                     // bathrooms: "{{ hero_project.bathrooms|default:'N/A'|escapejs }}",
-                    year: "{{ hero_project.year|default:'N/A'|escapejs }}",
-                    location: "{{ hero_project.location|default:'N/A'|escapejs }}",
+                    year: "{{ hero_project.status|default:'N/A'|escapejs }}",
+                    location: "{{ hero_project.scale|default:'N/A'|escapejs }}",
                     // style: "{{ hero_project.style|default:'N/A'|escapejs }}",
                     image: "{{ child.image.url|default:'/media/placeholder.jpg'|escapejs }}"
                 }{% if not forloop.last %},{% endif %}

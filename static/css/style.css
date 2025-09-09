@@ -2203,7 +2203,7 @@
     top: 0;
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
-    padding: 0.5rem 2rem; /* کاهش padding عمودی از 1rem به 0.5rem */
+    padding: 0.5rem 2rem; 
     display: flex;
     justify-content: center;
     z-index: 1000;
@@ -2241,6 +2241,7 @@
 }
 
 .nav-links a {
+ 
     text-decoration: none;
     color: #333;
     font-weight: 500;
@@ -2278,4 +2279,33 @@
     .nav-links {
         display: none; /* مخفی کردن لینک‌ها در موبایل (در صورت نیاز به منوی همبرگری) */
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* لوگو سمت چپ، منو سمت راست */
+    z-index: 1000;
+    transition: background 0.3s, box-shadow 0.3s;
+    height: 60px;
+    box-sizing: border-box;
 }

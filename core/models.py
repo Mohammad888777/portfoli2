@@ -63,7 +63,7 @@ class Project(models.Model):
         blank=True
     )
 
-    area=models.CharField(
+    type=models.CharField(
             max_length=250,
              null=True,
         blank=True
@@ -84,13 +84,13 @@ class Project(models.Model):
     )
 
 
-    year=models.CharField(
+    scale=models.CharField(
         max_length=250,
          null=True,
         blank=True
     )
 
-    location=models.CharField(
+    status=models.CharField(
         max_length=250,
          null=True,
         blank=True

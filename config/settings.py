@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-f##$z)$-j_7f=7aop6=_hjujxh5(9#1bh(wr3(n@j#=%&*@+j&'
 
-DEBUG = True
-# DEBUG = False
-
+# DEBUG = True
+DEBUG = False
+# 
 
 ALLOWED_HOSTS = [
-# 'nasimsalehnia.art', 'nasimsalehnia.art', 'localhost', '127.0.0.1'
+'nasimsalehnia.art', 'nasimsalehnia.art', 'localhost', '127.0.0.1'
 
 ]
 
@@ -153,16 +153,16 @@ EMAIL_HOST_PASSWORD ="builxulbbodqlayd"
 
 
 
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
-# SECURE_BROWSER_XSS_FILTER = True
-# SECURE_CONTENT_TYPE_NOSNIFF = True
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_SECONDS = 86400  # 1 day
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
-# # CSRF_FAILURE_VIEW="core.helpers.views.csrf_failure"
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 86400  # 1 day
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+# CSRF_FAILURE_VIEW="core.helpers.views.csrf_failure"
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
 
